@@ -1,6 +1,6 @@
 import RPi.GPIO as GPIO
 GPIO.setmode(GPIO.BCM)
-dac_bits = [22, 27, 17, 26, 25, 21,20, 16]
+dac_bits = [16, 20, 21, 25, 26,17,27,22]
 GPIO.setup(dac_bits, GPIO.OUT)
 dynamic_range = 3.3
 
@@ -14,8 +14,6 @@ def voltage_to_number(voltadge):
 def dec2bin(number):
     return[int(element) for element in bin(number)[2:].zfill(8)]
     print(number)
-
-
 try:
     while True:
         try:
@@ -24,11 +22,13 @@ try:
             dec2bin(number)
             print(number)
             print(dec2bin(number))
+            bits = dec2bin(number)
+            for i in range(8):
+                GPIO.output(dac_bits[i],bits[i])
             
         
         except ValueError:
             print("Вы ввели не число.Попробуйте еще раз\n")
-    
 finally:
     GPIO.output(dac_bits, 0)
     GPIO.cleanup()
