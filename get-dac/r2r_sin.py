@@ -11,8 +11,9 @@ start_time = 0
 
 if __name__== "__main__":
     try:
-        dac = r2r.R2R_DAC(12,True)
-        star_time = time.time()
+        dac = r2r.R2R_DAC([16, 20, 21, 25, 26,17,27,22],3.183,True)
+
+        start_time = time.time()
 
         while True:
             current_time = time.time() -  start_time
@@ -23,5 +24,8 @@ if __name__== "__main__":
                  
     finally:
         dac.deinit()
+
+
+
 
 
